@@ -15,7 +15,7 @@
             This parameter is mandatory. OS version number you want to check. Accepted values:
 
             Windows Client OS Versions:
-            CB/CBB/SAC (Semi-Annual Channel)           - 1507, 1511, 1607, 1703, 1709, 1803, 1809, 1903, 1909, 2004, 20H2, 21H2, 22H2, 23H2, 24H2.
+            CB/CBB/SAC (Semi-Annual Channel)           - 1507, 1511, 1607, 1703, 1709, 1803, 1809, 1903, 1909, 2004, 20H2, 21H2, 22H2, 23H2, 24H2, 25H2.
             Win 10 LTSB/LTSC                           - 2015 = 1507, 2016 = 1607, 2019 = 1809, 2021 = 21H2.
             Win 11 LTSC                                - 2024 = 24H2.
 
@@ -35,38 +35,38 @@
         .PARAMETER OutOfBandOnly
             This parameter is optional. Returns out-of-band/s only.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2
-            Show all information on the latest available OS build for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2
+            Show all information on the latest available OS build for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 -LatestReleases 2
-            Show all information on the latest 2 releases of OS builds for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -LatestReleases 2
+            Show all information on the latest 2 releases of OS builds for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 -ExcludePreview -LatestReleases 2
-            Show all information on the latest 2 releases excluding preview of OS builds for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -ExcludePreview -LatestReleases 2
+            Show all information on the latest 2 releases excluding preview of OS builds for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 -ExcludeOutOfBand -LatestReleases 2
-            Show all information on the latest 2 releases excluding out-of-band of OS builds for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -ExcludeOutOfBand -LatestReleases 2
+            Show all information on the latest 2 releases excluding out-of-band of OS builds for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 -PreviewOnly -LatestReleases 2
-            Show all information on the latest 2 preview releases of OS builds for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -PreviewOnly -LatestReleases 2
+            Show all information on the latest 2 preview releases of OS builds for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 -OutOfBandOnly -LatestReleases 2
-            Show all information on the latest 2 out-of-band releases of OS builds for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -OutOfBandOnly -LatestReleases 2
+            Show all information on the latest 2 out-of-band releases of OS builds for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 -BuildOnly
-            Show only the latest available OS build for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -BuildOnly
+            Show only the latest available OS build for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 -PreviewOnly -BuildOnly
-            Show only the latest available preview OS build for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -PreviewOnly -BuildOnly
+            Show only the latest available preview OS build for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 -OutOfBandOnly -BuildOnly
-            Show only the latest available out-of-band OS build for for Windows 10 Version 22H2 in list format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -OutOfBandOnly -BuildOnly
+            Show only the latest available out-of-band OS build for for Windows 11 Version 25H2 in list format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 | ConvertTo-Json
-            Show all information on the latest available OS build for Windows 10 Version 22H2 in json format.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 | ConvertTo-Json
+            Show all information on the latest available OS build for Windows 11 Version 25H2 in json format.
         .EXAMPLE
-            Get-LatestOSBuild -OSName Win10 -OSVersion 22H2 | ConvertTo-Json | Out-File .\Get-LatestOSBuild.json
-            Save the json format to a file on the latest available OS build for Windows 10 Version 22H2.
+            Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 | ConvertTo-Json | Out-File .\Get-LatestOSBuild.json
+            Save the json format to a file on the latest available OS build for Windows 11 Version 25H2.
 
         .NOTES
             Forked from 'Get-Windows10ReleaseInformation.ps1' created by Fredrik Wall.
@@ -122,10 +122,17 @@
         $TableNumber = 2
         $AtomFeedUrl = "https://support.microsoft.com/en-us/feed/atom/6ae59d69-36fc-8e4d-23dd-631d98bf74a9"
     }
-    ElseIf ($OSName -eq "Win11HotPatch") {
-        $URL = "https://support.microsoft.com/en-us/topic/release-notes-for-hotpatch-public-preview-on-windows-11-version-24h2-enterprise-clients-c117ee02-fd35-4612-8ea9-949c5d0ba6d1"
+    ElseIf ($OSName -eq "Win11HotPatch" -and $OSVersion -eq "24H2") {
+        $URL = "https://support.microsoft.com/en-us/topic/release-notes-for-hotpatch-on-windows-11-enterprise-version-24h2-c0906ee6-5e62-498f-bd5a-8f4966349f3c"
         $AtomFeedUrl = "https://support.microsoft.com/en-us/feed/atom/4ec863cc-2ecd-e187-6cb3-b50c6545db92"
-        $CategoryName = "Windows 11, version 24H2 Enterprise clients"
+        $CategoryName = "Windows 11 Enterprise version 24H2"
+        $HotpatchOSBuild = "26100"
+    }
+    ElseIf ($OSName -eq "Win11HotPatch" -and $OSVersion -eq "25H2") {
+        $URL = "https://support.microsoft.com/en-us/topic/release-notes-for-hotpatch-on-windows-11-enterprise-version-25h2-0bbaa1c7-5070-41ca-a7c9-4ead79602dbf"
+        $AtomFeedUrl = "https://support.microsoft.com/en-us/feed/atom/4ec863cc-2ecd-e187-6cb3-b50c6545db92"
+        $CategoryName = "Windows 11 Enterprise version 25H2"
+        $HotpatchOSBuild = "26200"
     }
     ElseIf ($OSName -eq "Server2022" -or $OSName -eq "Server2022Hotpatch") {
         # Disabled automatic detection of hotfix as it is not a reliable method of guaranteeing devices are applying hotpatch updates, non-hotpatch updates can still be applied.
@@ -167,7 +174,7 @@
     ElseIf ($OSName -eq "Server2022" -or $OSName -eq "Server2022Hotpatch") {
         $OSVersion = "21H2"
     }
-    ElseIf ($OSName -eq "Server2025" -or $OSName -eq "Server2025Hotpatch" -or $OSName -eq "Win11HotPatch") {
+    ElseIf ($OSName -eq "Server2025" -or $OSName -eq "Server2025Hotpatch") {
         $OSVersion = "24H2"
     }
 
@@ -331,7 +338,7 @@
                 # Support for Hotpatch
                 If ($null -eq $Update.OSBuild.Major) {
                     If ($OSName -eq "Win11Hotpatch") {
-                        $ResultObject["Version"] = "Version $OSVersion (OS build 26100)"
+                        $ResultObject["Version"] = "Version $OSVersion (OS build $HotpatchOSBuild)"
                     }
                     If ($OSName -eq "Server2022Hotpatch") {
                         $ResultObject["Version"] = "Version $OSVersion (OS build 20348)"
@@ -649,8 +656,8 @@
 # SIG # Begin signature block
 # MIImoQYJKoZIhvcNAQcCoIImkjCCJo4CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDFSV6K26jiRKX+HE54XaTU8i
-# b8eggiBWMIIFjTCCBHWgAwIBAgIQDpsYjvnQLefv21DiCEAYWjANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURa7wjClzKwadjv1DZJlLLt3J
+# zHuggiBWMIIFjTCCBHWgAwIBAgIQDpsYjvnQLefv21DiCEAYWjANBgkqhkiG9w0B
 # AQwFADBlMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYD
 # VQQLExB3d3cuZGlnaWNlcnQuY29tMSQwIgYDVQQDExtEaWdpQ2VydCBBc3N1cmVk
 # IElEIFJvb3QgQ0EwHhcNMjIwODAxMDAwMDAwWhcNMzExMTA5MjM1OTU5WjBiMQsw
@@ -827,31 +834,31 @@
 # A1UEAxMbQ2VydHVtIENvZGUgU2lnbmluZyAyMDIxIENBAhArB55OJJX0JFBQxYq3
 # KFFaMAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqG
 # SIb3DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3
-# AgEVMCMGCSqGSIb3DQEJBDEWBBR52wikUzqISilXydVvtZ5PFIp3DzANBgkqhkiG
-# 9w0BAQEFAASCAYBGabQYYQI9AMyeay0hZC9GF9oRyYeigEH/FNT1tHtWGGjz2WHQ
-# 5nDXYRC+xhSOD7VZE9GTNgufNTBWeZdb6j0OUmYEe+IqdZwRozwDD8X8/9DXmafs
-# cYXSzl/lPeyuqd4e6pPDleSboDZOjMC+FX+JzLudIv9CzzgH4Gj/czIL57CugVOH
-# Vn7t95+oe4i9FhgI7p893XCij3bH4W87jYX/PoNswvPaoPYNY5u4HeKATQP4W/IJ
-# n6D9zBaw4DDIopKonIxEcn7Sujw3fqfJDjeN7ydGYtFXPlx5QsNVLepTsYD2TgKR
-# 7r0qI6hJCkCjVmHwNxIahcQ89Y1+llrPVV16VNodo4+MB97jQ2Ossj8yCtkALbTO
-# Mict5oCesH0CyG0EaO0KPNqL+Njer/U+Y06JasJpCwQdxC8A5CEHyruBgBFVr3Rq
-# 11UINUSTwvv0j3fWLcR6tMohQaCqVgC3jFjm7Bi5jSm06wpEymtu7qI39Ms0TPFf
-# fgQXe/Klqp7OvhehggMmMIIDIgYJKoZIhvcNAQkGMYIDEzCCAw8CAQEwfTBpMQsw
+# AgEVMCMGCSqGSIb3DQEJBDEWBBS7KGWTVf3zTf+qZvRvQAYbNDJVmjANBgkqhkiG
+# 9w0BAQEFAASCAYBGHG9CX0mbdfzkXvmqS3I2YDi7v2q71Wdl+cTYcoztHwFwfZ05
+# A6SlkvLV7YFCjDbqzC8D+ymZmelFZANhah/w/LUJVlPkJpAJJUpYbsWAikB9L9h6
+# mm5YNfEcm7WBJLeXE1p4AXTq8zC6lKkBiUFCg/Ladvw9tusdgsjWJzkOunutGmif
+# VpoF4xvkONv6IfAmxpHzwsg1NOPf320i/IkuNYhZXq8HLuvV8Kn2xhYq6mOw/YIg
+# x042VHag+V2tyexH9Nhom2Nu78SYXwbKBPghyYSIX3zh6nKJOiUIFtRbCh3wsmS0
+# dlUEH8TeY9+94rCiw2N7TFW3xt9vKPwYNxvItpPa7ns/nFrpCJWpC/sQv9c2Un8o
+# GeC3EvwVX5zUf+8BoZcHoOBoKbFZ8vfJ1PJO3qPNVF9co+HH153+5hZCEpiOf5r7
+# 1mWIGKi+qWLA34ZQV6l57JH2avKzjc98ggLWP2rJ1NWWM6qNJTLZnZDWm/rghg+L
+# BnrBEtS1MkPZqXqhggMmMIIDIgYJKoZIhvcNAQkGMYIDEzCCAw8CAQEwfTBpMQsw
 # CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xQTA/BgNVBAMTOERp
 # Z2lDZXJ0IFRydXN0ZWQgRzQgVGltZVN0YW1waW5nIFJTQTQwOTYgU0hBMjU2IDIw
 # MjUgQ0ExAhAKgO8YS43xBYLRxHanlXRoMA0GCWCGSAFlAwQCAQUAoGkwGAYJKoZI
-# hvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjUwOTE2MTg0MDAy
-# WjAvBgkqhkiG9w0BCQQxIgQgtscG6IT7LwG9cWl7mUKP6sLv7yhTkTIDzsEOIPAj
-# R+MwDQYJKoZIhvcNAQEBBQAEggIAERA0ehsWcBqdeketm0jQGN3h+z8EzZxM3lw+
-# cUAqWIx45IoVonGLG5FQeTTBp5dgALXso1pvbGRFTJbT2sL3rF8wgAGovaeLchee
-# Cn5k11peot0Vn+LUFUC6LMUM9RqHwjV0YZObrLBASvKwZFoGzkp7AepgDd50M42s
-# wZhvzAJ0c0Tzf9ADkFQcbwyfl3ZZknF8Hj1i8G6GrFTs8Ym4rejGFAoi2KaJh/gZ
-# jVnwv8nKVm2mIu4SN1DcvKBgCuXFIMlKQyawPm63q15GFy9vapfVlPQuGbxQzPL7
-# v8HCtOyEQh5kYM38aPUMCQ3ORgKllPXUzn25kcDsqmkfvAc3W87jTuQ4M7Y+x7uM
-# zO0sDWKAHeaeduQLZ9bfX7lIvk+HknGWcRYH5vkbD3W0neoAOVhsuUmPkjizOd7S
-# PAaPOGTiewbQKw7lFb86Cf5iGoNlgX0ocDQwxelm2gkfG+eqIkL704wyFm7DoVoY
-# kCh3S6w64BTHlwYSLwF1UbgDnNdYz//I8N+ZDJrm066So6A8Pf7Fb/EUWBaSgwD5
-# 6D+up4kLC0YQCgOWTdisZu11tlRmXrVDpwHXl+M8o+7n4Z7uFiqiNz4nVNdUnAJ5
-# kbg869lhRr/t3EUdnglqeTUQxQ22kCzCGJuBW3FAUO5eFUl4/n7Pgi2HDSUGuHGF
-# HZJ3tmA=
+# hvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjYwMzA5MjEzNTQ1
+# WjAvBgkqhkiG9w0BCQQxIgQgDwyVYzf8nCPw69Ehr1mzR3laZxl9bUoQDW9qVwlx
+# hGQwDQYJKoZIhvcNAQEBBQAEggIALImLccis1+ul+umxp5GjaR7trIJTqdq+tFk3
+# GVz2Qtjt07VuktbRH+hvkFNwNRA6Y/xKKwtDNGm1wos9h8aI4+H6ks6AT7SAf/yX
+# xv5Yt43V5ckIaPy414t7sI1kw1Y7ERRI6xvu+ZNBI00iQyVry5TpDSPehTCZhnN5
+# vtp1bZGWTVcSqOI0K4vxAmdwxgdSHYgVJoXPL+NKTp3KwErSRsnBk5L+EospamDY
+# SeBpauWXyM62D2Ta6vGPB8FypD+wvIaaHlWOxLUgL1esrm5SIrrxkaROZrVMVleE
+# 7rVLRB+jsK3RNSS6pEZUaO0YofokoK+3sIiA4D8aj6+KjoA7ZJpxy7Aup3lFSLgZ
+# NBjaooQXp4jQoPfeW+TBiTuH4stqgsQYwDSoTAKp9CGieGGyYsZcW3Ojd07tBjG4
+# fmCFTVYJrqN/j6/q9kpo82Fqm5/VETBvAQj0m//No+uSDMLO1SLT7nuwgoqyyqB8
+# WZgdLWLpuT3J2FCNq2VsuWgkM5ToEMapLjdTkKoyiT5qWImkcWd1N2Elkcm7C5W1
+# mpYGUA2kmwJSqhjg7QCAntIoF75e8sfrorUaOAxK4V2c3hQmKZgdYAqQwBPdsrsf
+# hrtgZY5h36rOPYkgwp4ZZGntclzqsI1D+OuzfBfNpkU1qsykSVswR/qKojiUTyrC
+# UVFQVXQ=
 # SIG # End signature block

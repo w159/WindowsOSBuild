@@ -327,6 +327,22 @@ If ($PSVersionTable.PSVersion.Major -le 6) {
                 $Results.'Catalog URL' | Should -Match "https://www.catalog.update.microsoft.com/Search.aspx\?q=KB\d+|^N/A$"
             }
         }
+        Context "Win 11 (25H2)" {
+            It "Results" {
+                $Results = Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -latestreleases 1000
+                Start-Sleep -Seconds 0
+                $Results.Build.Count | Should -BeGreaterThan 0
+                $Results.Version | Should -Contain 'Version 25H2 (OS build 26200)'
+                $Results.Build | Should -Match '^26200\.'
+                $Results.'Availability date' | ForEach-Object { Find-ValidDate $_ } | Where-Object { $_ -eq $true }
+                $Results.Preview | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
+                $Results.'Out-of-band' | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
+                $Results.'Servicing option' | Should -Not -BeNullOrEmpty
+                $Results.'KB article' | Should -Match "^KB\d+( / KB\d+)*$|^N/A$"
+                $Results.'KB URL' | Should -Match "^\s*(https://support.microsoft.com/([a-z]{2}-[a-z]{2})?/help/\d+)\s*$|^\s*N/A\s*$"
+                $Results.'Catalog URL' | Should -Match "https://www.catalog.update.microsoft.com/Search.aspx\?q=KB\d+|^N/A$"
+            }
+        }
         Context "Windows 11 Hotpatch (24H2)" {
             It "Results" {
                 $Results = Get-LatestOSBuild -OSName Win11Hotpatch -OSVersion 24H2 -latestreleases 1000
@@ -334,6 +350,23 @@ If ($PSVersionTable.PSVersion.Major -le 6) {
                 $Results.Build.Count | Should -BeGreaterThan 0
                 $Results.Version | Should -Contain 'Version 24H2 (OS build 26100)'
                 (($Results.Build -match '^26100\.') -or ($Results.Build -match 'Security Update')) | Should -BeTrue
+                $Results.'Availability date' | ForEach-Object { Find-ValidDate $_ } | Where-Object { $_ -eq $true }
+                $Results.Hotpatch | Should -Not -BeNullOrEmpty
+                $Results.Preview | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
+                $Results.'Out-of-band' | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
+                $Results.'Servicing option' | Should -Not -BeNullOrEmpty
+                $Results.'KB article' | Should -Match "^KB\d+( / KB\d+)*$|^N/A$"
+                $Results.'KB URL' | Should -Match "^\s*(https://support.microsoft.com/([a-z]{2}-[a-z]{2})?/help/\d+)\s*$|^\s*N/A\s*$"
+                $Results.'Catalog URL' | Should -Match "https://www.catalog.update.microsoft.com/Search.aspx\?q=KB\d+|^N/A$"
+            }
+        }
+        Context "Windows 11 Hotpatch (25H2)" {
+            It "Results" {
+                $Results = Get-LatestOSBuild -OSName Win11Hotpatch -OSVersion 25H2 -latestreleases 1000
+                Start-Sleep -Seconds 0
+                $Results.Build.Count | Should -BeGreaterThan 0
+                $Results.Version | Should -Contain 'Version 25H2 (OS build 26200)'
+                (($Results.Build -match '^26200\.') -or ($Results.Build -match 'Security Update')) | Should -BeTrue
                 $Results.'Availability date' | ForEach-Object { Find-ValidDate $_ } | Where-Object { $_ -eq $true }
                 $Results.Hotpatch | Should -Not -BeNullOrEmpty
                 $Results.Preview | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
@@ -837,6 +870,22 @@ Else {
                     $Results.'Catalog URL' | Should -Match "https://www.catalog.update.microsoft.com/Search.aspx\?q=KB\d+|^N/A$"
                 }
             }
+            Context "Win 11 (25H2)" {
+                It "Results" {
+                    $Results = Get-LatestOSBuild -OSName Win11 -OSVersion 25H2 -latestreleases 1000
+                    Start-Sleep -Seconds 0
+                    $Results.Build.Count | Should -BeGreaterThan 0
+                    $Results.Version | Should -Contain 'Version 25H2 (OS build 26200)'
+                    $Results.Build | Should -Match '^26200\.'
+                    $Results.'Availability date' | ForEach-Object { Find-ValidDate $_ } | Where-Object { $_ -eq $true }
+                    $Results.Preview | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
+                    $Results.'Out-of-band' | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
+                    $Results.'Servicing option' | Should -Not -BeNullOrEmpty
+                    $Results.'KB article' | Should -Match "^KB\d+( / KB\d+)*$|^N/A$"
+                    $Results.'KB URL' | Should -Match "^\s*(https://support.microsoft.com/([a-z]{2}-[a-z]{2})?/help/\d+)\s*$|^\s*N/A\s*$"
+                    $Results.'Catalog URL' | Should -Match "https://www.catalog.update.microsoft.com/Search.aspx\?q=KB\d+|^N/A$"
+                }
+            }
             Context "Windows 11 Hotpatch (24H2)" {
                 It "Results" {
                     $Results = Get-LatestOSBuild -OSName Win11Hotpatch -OSVersion 24H2 -latestreleases 1000
@@ -844,6 +893,23 @@ Else {
                     $Results.Build.Count | Should -BeGreaterThan 0
                     $Results.Version | Should -Contain 'Version 24H2 (OS build 26100)'
                     (($Results.Build -match '^26100\.') -or ($Results.Build -match 'Security Update')) | Should -BeTrue
+                    $Results.'Availability date' | ForEach-Object { Find-ValidDate $_ } | Where-Object { $_ -eq $true }
+                    $Results.Hotpatch | Should -Not -BeNullOrEmpty
+                    $Results.Preview | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
+                    $Results.'Out-of-band' | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
+                    $Results.'Servicing option' | Should -Not -BeNullOrEmpty
+                    $Results.'KB article' | Should -Match "^KB\d+( / KB\d+)*$|^N/A$"
+                    $Results.'KB URL' | Should -Match "^\s*(https://support.microsoft.com/([a-z]{2}-[a-z]{2})?/help/\d+)\s*$|^\s*N/A\s*$"
+                    $Results.'Catalog URL' | Should -Match "https://www.catalog.update.microsoft.com/Search.aspx\?q=KB\d+|^N/A$"
+                }
+            }
+            Context "Windows 11 Hotpatch (25H2)" {
+                It "Results" {
+                    $Results = Get-LatestOSBuild -OSName Win11Hotpatch -OSVersion 25H2 -latestreleases 1000
+                    Start-Sleep -Seconds 0
+                    $Results.Build.Count | Should -BeGreaterThan 0
+                    $Results.Version | Should -Contain 'Version 25H2 (OS build 26200)'
+                    (($Results.Build -match '^26200\.') -or ($Results.Build -match 'Security Update')) | Should -BeTrue
                     $Results.'Availability date' | ForEach-Object { Find-ValidDate $_ } | Where-Object { $_ -eq $true }
                     $Results.Hotpatch | Should -Not -BeNullOrEmpty
                     $Results.Preview | ForEach-Object { Find-TrueOrFalse $_ } | Where-Object { $_ -eq $true }
@@ -1027,8 +1093,8 @@ Else {
 # SIG # Begin signature block
 # MIImoQYJKoZIhvcNAQcCoIImkjCCJo4CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGa4a1JkV3hfCOO655q3hFd+N
-# FveggiBWMIIFjTCCBHWgAwIBAgIQDpsYjvnQLefv21DiCEAYWjANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZDwOhKi7KwCNhg9hIJ9e8n7X
+# uPeggiBWMIIFjTCCBHWgAwIBAgIQDpsYjvnQLefv21DiCEAYWjANBgkqhkiG9w0B
 # AQwFADBlMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYD
 # VQQLExB3d3cuZGlnaWNlcnQuY29tMSQwIgYDVQQDExtEaWdpQ2VydCBBc3N1cmVk
 # IElEIFJvb3QgQ0EwHhcNMjIwODAxMDAwMDAwWhcNMzExMTA5MjM1OTU5WjBiMQsw
@@ -1205,31 +1271,31 @@ Else {
 # A1UEAxMbQ2VydHVtIENvZGUgU2lnbmluZyAyMDIxIENBAhArB55OJJX0JFBQxYq3
 # KFFaMAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqG
 # SIb3DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3
-# AgEVMCMGCSqGSIb3DQEJBDEWBBQxeudyGPAXfySSiO6zuokUPylPLzANBgkqhkiG
-# 9w0BAQEFAASCAYBvGGF3aZ3JDgJmuhVuFKShinPaavc0jaU9bA8KT9K0b3KRD04f
-# fqnf5Gv4iWXgB5ge7Wn+FXPiqTJD+qYojYeRiLTByMkDcNvTMwcE74T6VHLE7S7j
-# M9dHI1iuqdUtN0F5LltMPi1F0ZQcSv08iE5LjdNS/0dX3kDmyT3hMT84M5eHYDSe
-# a5CqI2AxtuNjyiUUcprGQnCoYwJW41uA5KmED6LxjfyPKTSIPBgVi2QWn79Vs+F/
-# tQRAuBklU25xeYFp2Q6BuxH5z3x54pyRgPo7JdlNt57Y/tzadgYuMRppz2FnPnrc
-# KkITuYn7MM/WrxBTiEe/n6LqZV2ZBa2xMbceWfq5yusWgRPVRkgOPXCc4wbKt9EC
-# goPE/zqqhw0LbrNtL9403EjyZM8VL7XjMk2rRWOAcGPOQk4gkXNtJ3oQdyO4sWuX
-# dEiE9Sh2k9oZq3VvISXgnCIRfg4vRkK/gYFkjgq/6b0pH7EnkEMtNbzsl8AcMaTt
-# aqDM4z4SRU9eRiahggMmMIIDIgYJKoZIhvcNAQkGMYIDEzCCAw8CAQEwfTBpMQsw
+# AgEVMCMGCSqGSIb3DQEJBDEWBBQLJiyUXXIKQpK6TdgcDSuzjpoYHjANBgkqhkiG
+# 9w0BAQEFAASCAYBYSqZrzqhwMZgcQf0BfuT6hu4jKZoQzWA97G6pajjU/RQ5mqB8
+# gGOoDFzg//X4PueTIhGKws9cCj/ODbQLgtagOZYRu74iqojzq/+yBketfxuhZAot
+# 8EBD4gi5Ui/DBTzM83Bkb/PHf/6U89D2lvWOFXGBSiD89+b8RA6TUgYSCh2uVMXJ
+# MRsh8rwHjfXrTnAJUYZgvTOQ/I2ATzXfuRpKryJwmp/c29Ez4FLi+rihevlqgPZS
+# OaS4FvI/0vz26CJFSoPSRnWTJWjj5qZt2bLLuRVNPqN7FUGuSqdtdPvUQFGrtTmW
+# b27YGfd6qPMJMgsVI/a5lwRo3Dt7rJENBySUiq5Gfwn+qXwue3KNYh8D1r45vTNd
+# f0AUrPq9a4ao441w8V2dlnbfTbbDd7z6coyWpsFBVdmawkwF4fvwN11Fo931/Iue
+# w55Sog91aMnFq+44vJtbCEBWcVV0HT+gBDo0Zu0q4P+mfzyQFVq1YN6eDqClcxjW
+# 4UtkjpHI8+i9wtGhggMmMIIDIgYJKoZIhvcNAQkGMYIDEzCCAw8CAQEwfTBpMQsw
 # CQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQsIEluYy4xQTA/BgNVBAMTOERp
 # Z2lDZXJ0IFRydXN0ZWQgRzQgVGltZVN0YW1waW5nIFJTQTQwOTYgU0hBMjU2IDIw
 # MjUgQ0ExAhAKgO8YS43xBYLRxHanlXRoMA0GCWCGSAFlAwQCAQUAoGkwGAYJKoZI
-# hvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjUwNzE3MTkwODE4
-# WjAvBgkqhkiG9w0BCQQxIgQg0Pr4HqzdQnkoDY5P4e/6b1XMcVbMfhRon1ivrv+h
-# BVEwDQYJKoZIhvcNAQEBBQAEggIAm5TEY9zxX3n7akaF40ze/R7gOiQu7N7IqL1M
-# 6PXksL4X/qQGXlFWNxpUDcFaWEbr/7XNx0/SJzW6AKuAyH0tkxEE/ck7AY3/nzSo
-# 72XaaljQLAaOt9UPRrBeKy3nA0YgF8uPwfOGtV1nYT7BDR19QtdtClg6v5w5AtOd
-# Kk25AR1JgUbeS/IaIihPuey/0STusPjAxZsoIwZpbvp9XC1J4MaSMZAHHBmftwU5
-# yLbpDUH/iMIqzTJmeqUcBXHhhUXzQ4ReXd+5z27FTue5JuK8pFx3IcKFImT3qdrX
-# +FwjUQ8lcqzDaZ3U8HecI2RyiUJRzt2Q+valsYAnybXUGrpCwfMe7FxLOSCVPv/S
-# 73MLU0D9BTUnEAMA9IsXQak0zDu8J5vA8q9PM4BM8YF00nkenDpJmUFzWxBwNY6b
-# E5zwwQFDWh/6WnuVOVJIv0T5TIc7ioy33SbtXjXZ16quq636znl3ZVGTquDqlvLN
-# qcyux3B30yjtjCnj5r9XyZn6xDoo01KRjiYDSDRu7VjOP5vNj9OBPVP6V9wUjsCP
-# /N0+4c/7WiODSbPzg5h8Bu4zFrk0tLJD+M1jtcl0uyuTR1TT134wtKO+eT8OuPPx
-# seGr4sca0op0/PkYZ7XMD6mgxAw6P033XtAsmyeHreo33uoLR+G/Y1Amz5QzbDOi
-# MiHKBfI=
+# hvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjYwMzA5MjEyODU1
+# WjAvBgkqhkiG9w0BCQQxIgQgwsgW8fhr1ncDRtiXehR9QX2Ia+y2KGZYrabX5ety
+# GXkwDQYJKoZIhvcNAQEBBQAEggIAesAGJDPZbjIHneDsbr3G9VAtrSKihYfsxd1Z
+# gL1xrHUpQsfjbMEpVOeOrqyMG81QUNvm3m6pnILVR1Hz+ybrY1K5xXHdg9wZSmz7
+# Bs9lXf0s9l5U6jzWz267fagkQjNsAr2/KXjmXV5wLuYsxJ9MqcgNuBLbEoLl5McB
+# TGloMCqGWjKnSTLuydTv9R/0syN4XJ4TlqgDRmYI8FWenDqizpCquJPz06WDI9rZ
+# Y8A/pr4dCcymehd85AbUaIPPeV1Y7ulHx2czJ5iidN3l+/l3pXHgghlOsIsXqaUQ
+# NM6kg0Mg3jD1cLLm6kroELp6fUcXzhMdwju2FGH0aTCz36+oJ/DKgRfBQTpQfbbd
+# j84UwHsFsAV1q1yCHh2EWEP+jBTzLg4X0LqmmQWPMkXecJizALfnNpvD8AZW1ktH
+# qjYskeBALJYr2KvJ5sGyH6sy+0xvQ2wHzjV4FNdjNR+n6gHYANvAyL7C9mis8aTc
+# t+CKfZWJ231CqsPScPEFNa5qRUXs5d6mGYuBTiquYOOBJ4obDi+lmkLiRfdkDQkR
+# pdJU3HZtl8EdPzoIz1mXbTjONbv1iU3yC2S9G0bMymGBIb5yXm5XXNiTe30G7iOk
+# MKlH1mLI2Vj5oq9el80VeF0NcxAOYKSWOHygkyHTvmholyeN+gCfOH5slOhAK+Yw
+# jQQOZg8=
 # SIG # End signature block
